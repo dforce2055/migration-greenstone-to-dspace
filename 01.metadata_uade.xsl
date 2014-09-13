@@ -54,7 +54,7 @@
       </dcvalue>
     </xsl:for-each>
 
-    <!-- copiar 'uade.pais_region' -->
+    <!-- copiar 'uade.pais_region'  -->
     <xsl:for-each select="dublin_core/dcvalue[@element='uade.pais_region']">
       <dcvalue element="pais" qualifier="region" language="es_AR">
        <xsl:value-of select="." />
