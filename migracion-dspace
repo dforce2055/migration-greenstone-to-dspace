@@ -8,8 +8,14 @@
 # exportación de Greenstone y poder importarla en DSpace        #
 #---------------------------------------------------------------#
 # Las versiones utilizadas de de las herramientas son:          #
-# 	Greenstone 2.85                                         #
-#	 Dspace 4.1                                             #
+# 	Greenstone 2.85                                     		#
+#	 Dspace 4.1                                             	#
+#---------------------------------------------------------------#
+#---------------------------------------------------------------#
+# Requisitos de Software										#
+# SO: Debian 7													#
+# iconv	versión:												#
+# xsltproc versión:												#
 #---------------------------------------------------------------#
 
 # Declaración de vectores
