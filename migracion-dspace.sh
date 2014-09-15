@@ -146,7 +146,7 @@ done
 echo "Fin del script"
 
 
-# Furtas tareas de modificación:                                #
+# Futuras tareas de modificación:                               #
 # 1. Adaptar el código con estructuras de datos más eficientes  #
 # 2. Corregir aspectos estilísticos de presentación de código   #
 # 3. Adaptar el código a Python. Beneficio: Multiplataforma     #
