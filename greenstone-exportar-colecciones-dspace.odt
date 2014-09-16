@@ -1,0 +1,109 @@
+Exportar Colecciones de Greenstone:
+Para exportar una colección en Greenstone, necesitamos utilizar la herramienta de Interfaz del Bibliotecario (GLI).
+1. GLI  > Archivo > Exportar
+2. Exportar a: Dspace   [plug-in para exportar en formato aceptado por DSpace]
+3. Seleccionar la colección que deseamos exportar.
+Los siguientes pasos nos darán como resultado la exportación de una colección, dependiendo del tamaño de la colección este proceso puede llevar de minutos a  horas.
+• La exportación dará como resultado un directorio con el nombre de la colección exportada:
+• 37 directorios HASH con cada ítem de la colección.
+• Dentro de cada directorio HASH 3 archivos principales:
+              • contents > contiene un listado con los bundles de cada bitstream del item.
+ • dublin_core.xml > contiene los metadatos descriptores del ítem.
+ • archivo.pdf > el documento principal del ítem.
+ 
+• exported_DSpace_tif
+• HASH011ec27a8ca5c08cd399b0d9
+• contents
+• dublin_core.xml
+• TIF-FADA-00-20140429163358.pdf
+HASH011f28b511cf39a146a28cde
+HASH0121d81799cd5171728fbddb
+HASH01244f6061d28ffdae4ec480
+HASH013486468457b103dab13370
+HASH01402434a975c4fb39674688
+HASH01446f89263c39fcf38190a0
+HASH0154ad0adc9c10e6122e7d20
+HASH0178ce06e4b0f072cdac9fcd
+HASH017d6381e4f63117a63ee13d
+HASH017ec493748a2d1b32b53ba3
+HASH019d30a5baaa70a69b2803d0
+HASH01a0fc6a14d87640368b9ef6
+HASH01ac9526ed4af2b05e14ff6e
+HASH01ae9d829b37c4ef06d29252
+HASH01c3c8ae6f5971b90baeb9c4
+HASH01e94e093f22d78c15a54c8f
+HASH01e99bfc5f42b58724dd1918
+HASH01e9b60874fb37236610977e
+HASH01f90fb03fa8bb3fe515b857
+HASH01fd3b68bf2d828b5cdf2105
+HASH03a995a65924195ed67473
+HASH1805c4746dfa0f15ace003
+HASH21ab9c0bb43de4cad8935b
+HASH333f3b2228adfaf3f2adae
+HASH3f5f7abe9c2dc554b40efb
+HASH4a61b445d3592295016079
+HASH518229a571125f52b4872f
+HASH5d65cac735e4a01f787727
+HASH6430df4b1ae698c617d44a
+HASH82bb5e4691f164effa9524
+HASH8df33a9298bfd3f74bed64
+HASHcbd80efda7f6ffb9f03566
+HASHd09e022fab3a189dbbf0fd
+HASHe5911f38163b09c5705249
+HASHf33960955ddbf48f3086d2
+HASHfeeaa6d3026fb833ae6d31
+archiveinf-doc.gdb
+archiveinf-src.gdb
+earliestDatestamp
+OIDcount
+
+
+¿Qué problemas presenta esta exportación?
+La colección no está lista para ser importada directamente a DSpace, ya que presenta varios problemas a corregir.
+1. Dentro de cada directorio HASH se guardan muchos archivos con extensión .jpg que son basura.
+2. El archivo content está mal confeccionado, no tiene el bundle:principal que sería el ítem principal, y tiene además todos los archivos .jpg agregados.
+3. No existe el archivo licence.txt, el cual es necesario para saber los derechos sobre la obra a importar en el RI DSpace.
+4. El archivo metadata.xml está mal confeccionado.
+a. En primer lugar, la codificación de caracteres está mal, no reconoce las tildes.
+b. En segundo lugar, los campos de metadatos personalizados, deben estar en un archivo XML aparte, separados de los campos DC.
+
+
+Normalizar colecciones exportadas desde Greenstone 2.85 a Dspace 4.1
+¿Cómo corregir estos problemas?
+Para normalizar la colección y adaptarla a DSpace, tenemos que afrontar 2 grandes tareas.
+1. Normalizar los archivos de los ítems exportados.
+2. Normalizar los metadatos de los ítems exportados.
+
+1. Normalizar los archivos:
+1.1. Eliminar todos los archivos .jpg basura (siempre y cuando estos no sean el documento principal del ítem)
+1.2. Confeccionar bien el archivo content , con los bundle correspondientes a cada bitstream.
+Ejemplo de content:
+Archivo-principal.pdf bundle:ORIGINAL primary:true
+license.txt bundle:LICENSE
+1.3. Crear y confeccionar el archivo licence.txt.
+2. Normalizar los metadatos:
+2.1. Codificar el archivo metadata.xml en formato de codificación UTF-8.
+2.2. Extraer del archivo metadata.xml los campos personalizados. Guardar los campos (y sus valores) en un nuevo archivo XML metadata_nombre-esquema.xml 
+Codificación: <?xml version="1.0" encoding="utf-8"?>
+Esquema tipo DC: <dublin_core schema="nombre-esquema"></dublin_core>
+Nombre: metadata_nombre-esquema.xml
+Codificación: <?xml version="1.0" encoding="utf-8"?>
+Campos: <dcvalue element="nota" qualifier="tecnica" language="es_AR"></>
+2.3. Crear en DSpace un esquema de metadatos personalizado nuevo. 
+Debe coincidir con nombre-esquema. Y los campos declarados deben ser del tipo
+uade.nota.tecnica
+Nombre del esquema . nombre del campo . calificador > separado siempre por .
+
+Cabe destacar que esta tarea se debe implementar con cada ítem exportado desde Greenstone.
+Para esta tarea por lotes, desarrolle un script en bash que normaliza cada ítem exportado y sus respectivos metadatos, dejándolos listos para importar en DSpace.
+El script se encuentra en gitHub
+https://github.com/dforce2055/migration-greenstone-to-dspace/blob/master/migracion-dspace.sh
+
+Y 2 archivos que hacen de extractor de metadatos
+https://github.com/dforce2055/migration-greenstone-to-dspace/blob/master/01.metadata_uade.xsl
+https://github.com/dforce2055/migration-greenstone-to-dspace/blob/master/02.dublin_core.xsl
+
+También es necesario contar con el archivo de licencia
+https://github.com/dforce2055/migration-greenstone-to-dspace/blob/master/licence-txt
+El cual creo importante, definir primero el tipo de licencia para poder depositar/distribuir la obra. [no confundir con licencia de uso, P.R. CC Crative Commons)
+
