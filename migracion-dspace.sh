@@ -1,21 +1,21 @@
 #! /bin/bash
-#---------------------------------------------------------------#
-#---------NORMALIZACIÓN DE ÍTEMS EXPORTADOS GREENSTONE----------#
-#---------------------------------------------------------------#
-# Los ítems exportados desde Greenstone con el plugin "dspace"  #
-# no están aptos para importar directamente a DSpace.           #
-# Por eso este plugin se creó para normalizar y adaptar la      #
-# exportación de Greenstone y poder importarla en DSpace        #
-#---------------------------------------------------------------#
-# Las versiones utilizadas de de las herramientas son:          #
-#    Greenstone 2.85                                            #
-#    Dspace 4.1                                                 #
-#---------------------------------------------------------------#
-# Requisitos de Software                                        #
-# SO: Debian 7                                                  #
-# iconv versión:                                                #
-# xsltproc versión:                                             #
-#---------------------------------------------------------------#
+#----------------------------------------------------------------#
+#---------NORMALIZACIÓN DE ÍTEMS EXPORTADOS GREENSTONE-----------#
+#----------------------------------------------------------------#
+# Los ítems exportados desde Greenstone con el plugin "dspace"   #
+# no están aptos para importar directamente a DSpace.            #
+# Por eso este plugin se creó para normalizar y adaptar la       #
+# exportación de Greenstone y poder importarla en DSpace         #
+#----------------------------------------------------------------#
+# Las versiones utilizadas de de las herramientas son:           #
+#    Greenstone 2.85                                             #
+#    Dspace 4.1                                                  #
+#----------------------------------------------------------------#
+# Requisitos de Software                                         #
+# SO: Debian 7                                                   #
+# iconv versión:Debian EGLIBC 2.13-38+deb7u4) 2.13               #
+# xsltproc versión: libxml 20800, libxslt 10126 and libexslt 815 #
+#----------------------------------------------------------------#
 
 # Declaración de vectores
 declare -a directorios
@@ -146,22 +146,22 @@ done
 echo "Fin del script"
 
 
-# Futuras tareas de modificación:                               #
-# 1. Adaptar el código con estructuras de datos más eficientes  #
-# 2. Corregir aspectos estilísticos de presentación de código   #
-# 3. Adaptar el código a Python. Beneficio: Multiplataforma     #
-#---------------------------------------------------------------#
-#-----------------------FIN DEL SCRIPT--------------------------#
-#---------------------------------------------------------------#
-# Autor: dforce2055                                             #
-# Versión: v. 0.1 Alfa                                          #
-# Licencia: GNU GPL v. 3.0                                      #
-# Fecha: 09-07-2014                                             #
-# @COPYLEFT ALLL WRONGS RESERVED                                #
-# Libre uso, copia, modificación y redistribución del script    #
-# Siempre y cuando los mismos derechos sean preservados en las  #
-# versiones modificadas/posteriores.                            #
-# http://es.wikipedia.org/wiki/copyleft                         #
-# https://es.wikipedia.org/wiki/GNU_General_Public_License      #
-# CC BY NC SA                                                   #
-#---------------------------------------------------------------# 
+# Futuras tareas de modificación:                                #
+# 1. Adaptar el código con estructuras de datos más eficientes   #
+# 2. Corregir aspectos estilísticos de presentación de código    #
+# 3. Adaptar el código a Python. Beneficio: Multiplataforma      #
+#----------------------------------------------------------------#
+#-----------------------FIN DEL SCRIPT---------------------------#
+#----------------------------------------------------------------#
+# Autor: dforce2055                                              #
+# Versión: v. 0.1 Alfa                                           #
+# Licencia: GNU GPL v. 3.0                                       #
+# Fecha: 09-07-2014                                              #
+# @COPYLEFT ALLL WRONGS RESERVED                                 #
+# Libre uso, copia, modificación y redistribución del script     #
+# Siempre y cuando los mismos derechos sean preservados en las   #
+# versiones modificadas/posteriores.                             #
+# http://es.wikipedia.org/wiki/copyleft                          #
+# https://es.wikipedia.org/wiki/GNU_General_Public_License       #
+# CC BY NC SA                                                    #
+#----------------------------------------------------------------# 
